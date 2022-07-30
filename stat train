@@ -1,0 +1,19 @@
+local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:wait()
+local Humanoid = Character:WaitForChild("Humanoid")
+local Tool = script.Parent
+
+Tool.Equipped:Connect(function(Equip)
+    local IdleAnim = Instance.new("Animation")
+    IdleAnim.AnimationId = "0"
+    local PlayAnim = Humanoid:LoadAnimation(IdleAnim)
+    Tool.Activated:Connect(function(Activated)
+        local ActionAnim = Instance.new("Animation")
+        IdleAnim.AnimationId = "0"
+        local ActionPlay = Humanoid:LoadAnimation(ActionAnim)
+        local Stat1 = Player:WaitForChild("Stat1").Value
+        
+        wait(ActionAnim.Length)
+        Stat1 = Stat1 + 0.1
+    end
+ end)
