@@ -1,0 +1,8 @@
+local Camera = game.Workspace.CurrentCamera
+local Client = game.Players.LocalPlayer
+local CameraPart = game.Workspace.CameraPart
+
+repeat wait() until Client.Character
+
+Camera.CameraType = "Scriptable"
+Camera.CFrame = CameraPart.CFrame

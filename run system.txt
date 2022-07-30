@@ -1,0 +1,30 @@
+local UIS = game:GetService("UserInputService")
+local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:wait()
+local CanRun = Player:WaitForChild("CanRun")
+
+
+UIS.InputBegan:Connect(function(input)
+	   if input.KeyCode == Enum.KeyCode.LeftShift then
+		if CanRun.Value == true then
+       	 	local Anim = Instance.new("Animation")
+        	Anim.AnimationId = "rbxassetid://5431913931"
+        	PlayAnim = Character.Humanoid:LoadAnimation(Anim)
+			PlayAnim:Play()
+		end
+    end
+end)
+
+
+UIS.InputEnded:Connect(function(input)
+	    if input.KeyCode == Enum.KeyCode.LeftShift then
+		if CanRun.Value == true then
+			CanRun.Value = false
+			 Character.Humanoid.WalkSpeed = 16
+			 PlayAnim:Stop()
+			 local Humanoid = Character:WaitForChild("Humanoid")
+			 wait(1)
+			 CanRun.Value = true
+		end
+    end
+end)

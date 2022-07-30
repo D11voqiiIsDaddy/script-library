@@ -1,0 +1,55 @@
+local DataStoreService = game:GetService("DataStoreService")
+
+
+local StrengthData = DataStoreService:GetDataStore("StrengthData")
+local DuraData = DataStoreService:GetDataStore("DuraData")
+local AttackSpeedData = DataStoreService:GetDataStore("AttackSpeed")
+local SpeedData = DataStoreService:GetDataStore("SpeedData")
+local BannedData = DataStoreService:GetDataStore("BData")
+
+
+game.Players.PlayerAdded:Connect(function(player)
+	local Strength = Instance.new("NumberValue",player)
+	local Durability = Instance.new("NumberValue",player)
+	local AttackSpeed = Instance.new("NumberValue",player)
+	local Speed = Instance.new("NumberValue",player)
+	local Banned = Instance.new("BoolValue",player)
+	local CanRun = Instance.new("BoolValue",player)
+	CanRun.Value = true
+	CanRun.Name = "CanRun"
+ 
+	Strength.Name = "Strength"
+	Durability.Name = "Durability"
+	AttackSpeed.Name = "AttackSpeed"
+	Speed.Name = "Speed"
+	Banned.Name = "Banned"
+	Speed.Value = 5
+	Banned.Value = false
+ 
+	Strength.Name = "Strength"
+	Durability.Name = "Durability"
+	AttackSpeed.Name = "AttackSpeed"
+	Speed.Name = "Speed"
+	Banned.Name = "Banned"
+	Speed.Value = 5
+ 
+	if Banned.Value == true then
+		player:Kick("Ez.")
+	end
+ 
+	Banned.Changed:Connect(function(Ban)
+		if Banned.Value == true then
+			player:Kick("Failed to save braincells, don't reconnect.")
+		end
+	end)
+ 
+	game.Players.PlayerRemoving:Connect(function(player)
+    	pcall(function()
+        	StrengthData:SetAsync(player.UserId.."--Str--"..Strength.Value)
+       	 	DuraData:SetAsync(player.UserId.."--Dura--"..Durability.Value)
+        	AttackSpeedData:SetAsync(player.UserId.."--AttackSpeed--"..AttackSpeed.Value)
+        	SpeedData:SetAsync(player.UserId.."--SpeedData--"..Speed.Value)
+        	BannedData:SetAsync(player.UserId.."--BannedData--"..Banned.Value)
+    	end)
+	end)
+end)
